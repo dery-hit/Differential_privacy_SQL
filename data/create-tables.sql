@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 -- Script to load data from TPC-H benchmark
 -- Generate data using ./dbgen (this results in .tbl files)
--- Copy the .tbl files to /tpch-experiments/data/
+-- Copy the .tbl files to /home/tejvi/tpch-dbgen/data/
 -- Then run this script to load the data into vertica
 --------------------------------------------------------------------------------
 
@@ -23,9 +23,10 @@ CREATE TABLE part (
   P_SIZE integer,
   P_CONTAINER varchar(10),
   P_RETAILPRICE decimal,
-  P_COMMENT varchar(23)
+  P_COMMENT varchar(23),
+  P_EXTRA varchar(10)
 );
-COPY part FROM '/tpch-experiments/data/part.tbl' DELIMITER '|';
+COPY part FROM '/home/tejvi/tpch-dbgen/data/part.tbl' DELIMITER '|';
 
 CREATE TABLE supplier (
   S_SUPPKEY integer PRIMARY KEY,
@@ -34,18 +35,20 @@ CREATE TABLE supplier (
   S_NATIONKEY integer,
   S_PHONE varchar(15),
   S_ACCTBAL decimal,
-  S_COMMENT varchar(101)
+  S_COMMENT varchar(101),
+  P_EXTRA varchar(10)
 );
-COPY supplier FROM '/tpch-experiments/data/supplier.tbl' DELIMITER '|';
+COPY supplier FROM '/home/tejvi/tpch-dbgen/data/supplier.tbl' DELIMITER '|';
 
 CREATE TABLE partsupp (
   PS_PARTKEY integer,
   PS_SUPPKEY integer,
   PS_AVAILQTY integer,
   PS_SUPPLYCOST Decimal,
-  PS_COMMENT varchar(199)
+  PS_COMMENT varchar(199),
+  P_EXTRA varchar(10)
 );
-COPY partsupp FROM '/tpch-experiments/data/partsupp.tbl' DELIMITER '|';
+COPY partsupp FROM '/home/tejvi/tpch-dbgen/data/partsupp.tbl' DELIMITER '|';
 
 CREATE TABLE customer (
   C_CUSTKEY integer PRIMARY KEY,
@@ -55,9 +58,10 @@ CREATE TABLE customer (
   C_PHONE varchar(15),
   C_ACCTBAL Decimal,
   C_MKTSEGMENT varchar(10),
-  C_COMMENT varchar(117)
+  C_COMMENT varchar(117),
+  P_EXTRA varchar(10)
 );
-COPY customer FROM '/tpch-experiments/data/customer.tbl' DELIMITER '|';
+COPY customer FROM '/home/tejvi/tpch-dbgen/data/customer.tbl' DELIMITER '|';
 
 CREATE TABLE orders (
   O_ORDERKEY integer PRIMARY KEY,
@@ -68,9 +72,10 @@ CREATE TABLE orders (
   O_ORDERPRIORITY varchar(15),
   O_CLERK varchar(15),
   O_SHIPPRIORITY Integer,
-  O_COMMENT varchar(79)
+  O_COMMENT varchar(79),
+  P_EXTRA varchar(10)
 );
-COPY orders FROM '/tpch-experiments/data/orders.tbl' DELIMITER '|';
+COPY orders FROM '/home/tejvi/tpch-dbgen/data/orders.tbl' DELIMITER '|';
 
 CREATE TABLE lineitem (
   L_ORDERKEY integer,
@@ -88,21 +93,24 @@ CREATE TABLE lineitem (
   L_RECEIPTDATE date,
   L_SHIPINSTRUCT varchar(25),
   L_SHIPMODE varchar(10),
-  L_COMMENT varchar(44)
+  L_COMMENT varchar(44),
+  P_EXTRA varchar(10)
 );
-COPY lineitem FROM '/tpch-experiments/data/lineitem.tbl' DELIMITER '|';
+COPY lineitem FROM '/home/tejvi/tpch-dbgen/data/lineitem.tbl' DELIMITER '|';
 
 CREATE TABLE nation (
   N_NATIONKEY integer PRIMARY KEY,
   N_NAME varchar(25),
   N_REGIONKEY integer,
-  N_COMMENT varchar(152)
+  N_COMMENT varchar(152),
+  P_EXTRA varchar(10)
 );
-COPY nation FROM '/tpch-experiments/data/nation.tbl' DELIMITER '|';
+COPY nation FROM '/home/tejvi/tpch-dbgen/data/nation.tbl' DELIMITER '|';
 
 CREATE TABLE region (
   R_REGIONKEY integer PRIMARY KEY,
   R_NAME varchar(25),
-  R_COMMENT varchar(152)
+  R_COMMENT varchar(152),
+  P_EXTRA varchar(10)
 );
-COPY region FROM '/tpch-experiments/data/region.tbl' DELIMITER '|';
+COPY region FROM '/home/tejvi/tpch-dbgen/data/region.tbl' DELIMITER '|';
