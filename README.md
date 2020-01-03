@@ -5,6 +5,7 @@ This class calculates error of elastic sensitivity-based differential privacy fo
 ## Building & Running
 
 ```
+sbt compile
 sbt run
 ```
 ## Generating benchmark data
